@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.5.3] - 2026-08-22
+
+### Chores
+- chore(deps): bump cryptography in the uv group across 1 directory (799eb84)
+- chore(deps): bump mcp in the uv group across 1 directory (a1ffeff)
+
+
 ## [0.5.2] - 2026-07-08
 
 ### Chores
