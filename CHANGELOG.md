@@ -1,5 +1,20 @@
 # Changelog
 
+## [0.5.4] - 2026-09-20
+
+### Bug Fixes
+- fix: shipped resources referenced a tool that does not exist (9d3fbad)
+
+### Refactoring
+- refactor: remove unused models package; consolidate GEMINI.md into AGENTS.md (d2d84eb)
+
+### Tests
+- fix: shipped resources referenced a tool that does not exist (9d3fbad)
+
+### Chores
+- chore: ignore local 1Password plugin state (93b54a8)
+
+
 ## [0.5.3] - 2026-08-22
 
 ### Chores
