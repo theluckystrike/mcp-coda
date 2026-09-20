@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.5.5] - 2026-09-20
+
+### Bug Fixes
+- fix(ci): changelog classified commits by whole message, not subject (1fc1a55)
+
+### Chores
+- chore(deps): bump anyio in the uv group across 1 directory (854b8e9)
+
+
 ## [0.5.4] - 2026-09-20
 
 ### Bug Fixes
