@@ -51,7 +51,7 @@ async def coda_list_docs(
 
     Returns doc metadata including name, owner, folder, and timestamps. Does NOT
     return page content or table data — use coda_list_pages or coda_list_tables
-    for those. Rate-limited to 4 calls per 6 seconds. Use the query parameter to
+    for those. Rate-limited to 100 calls per 6 seconds. Use the query parameter to
     search by doc name. Pass cursor to paginate through results.
     """
     try:
