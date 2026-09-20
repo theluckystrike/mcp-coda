@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.5.6] - 2026-09-20
+
+### Bug Fixes
+- fix(deps): bump click to clear PYSEC-2026-2132 (f96fdc0)
+
+
 ## [0.5.5] - 2026-09-20
 
 ### Bug Fixes
