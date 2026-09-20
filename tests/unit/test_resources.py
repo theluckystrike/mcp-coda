@@ -209,3 +209,33 @@ class TestStaticResources:
         assert isinstance(result, str)
         assert len(result) > 200
         assert keyword in result
+
+
+class TestResourceToolReferences:
+    """Every `coda_*` tool named in shipped resource/prompt markdown must exist.
+
+    These files are handed to LLM consumers as guidance; naming a tool that is
+    not registered makes the model emit tool calls that can never succeed.
+    """
+
+    def test_all_referenced_tools_are_registered(self) -> None:
+        import re
+
+        servers_dir = Path(_RESOURCES_DIR).parent / "servers"
+        registered = {
+            m.group(1)
+            for path in servers_dir.glob("*.py")
+            for m in re.finditer(
+                r"^async def (coda_\w+)", path.read_text(encoding="utf-8"), re.MULTILINE
+            )
+        }
+        assert registered, "no tools discovered — test is broken, not the docs"
+
+        unknown: dict[str, set[str]] = {}
+        for path in sorted(Path(_RESOURCES_DIR).rglob("*.md")):
+            referenced = set(re.findall(r"`(coda_\w+)`", path.read_text(encoding="utf-8")))
+            missing = referenced - registered
+            if missing:
+                unknown[path.name] = missing
+
+        assert not unknown, f"resource docs reference non-existent tools: {unknown}"

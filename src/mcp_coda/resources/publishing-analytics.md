@@ -53,7 +53,7 @@ Available categories for `coda_publish_doc`:
 | `coda_list_pack_analytics` | Pack formula invocation metrics |
 | `coda_get_pack_analytics_summary` | Aggregated Pack usage |
 | `coda_list_pack_formula_analytics` | Per-formula usage breakdown |
-| `coda_get_analytics_last_updated` | Timestamp of last analytics refresh |
+| `coda_get_analytics_updated` | Timestamp of last analytics refresh |
 
 ### Date Filtering
 
@@ -70,7 +70,7 @@ coda_list_doc_analytics(
 
 - `since_date` / `until_date`: ISO 8601 date strings
 - `scale`: `daily` returns per-day data points; `cumulative` returns running totals
-- Analytics data is updated periodically (check `coda_get_analytics_last_updated`)
+- Analytics data is updated periodically (check `coda_get_analytics_updated`)
 - Data is available for the last 90 days for free plans, longer for paid plans
 
 ### Metrics Available

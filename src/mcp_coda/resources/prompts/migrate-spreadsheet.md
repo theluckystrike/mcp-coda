@@ -16,14 +16,14 @@ Migrate $source_format data into Coda doc `$doc_id`.
    - URLs → `hyperlink`
 3. **Check target tables** — use `coda_list_tables` on doc "$doc_id" to see existing tables:
    - If a matching table exists, verify column compatibility
-   - If no table exists, create one with `coda_create_table` or suggest manual creation
-4. **Prepare data** — format rows for `coda_upsert_rows`:
+   - If no table exists, suggest manual creation — the Coda API cannot create tables
+4. **Prepare data** — format rows for `coda_insert_rows`:
    - Convert dates to ISO 8601 strings
    - Convert booleans to `true`/`false`
    - Map select values to match existing options exactly (case-sensitive)
    - Identify a key column for upsert deduplication
 5. **Execute migration** in batches:
-   - Max 500 rows per `coda_upsert_rows` call
+   - Max 500 rows per `coda_insert_rows` call
    - Wait for mutation completion between batches
    - Track failed rows and retry separately
 6. **Verify** — compare source row count with target, spot-check a sample of rows for data integrity.

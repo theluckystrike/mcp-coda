@@ -34,7 +34,8 @@ Set up a $trigger_type-triggered automation in Coda doc `$doc_id`.
 ### 4. Implement
 
 - For webhooks: document the endpoint URL, payload format, and expected response.
-- For buttons: create the button column with `coda_upsert_rows` or document the formula for manual setup.
+- For buttons: document the formula for manual setup — the API cannot create columns. Once the
+  button column exists, fire it with `coda_push_button`.
 - For time-based: provide step-by-step UI configuration instructions.
 
 ### 5. Test

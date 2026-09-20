@@ -101,5 +101,11 @@ class TestCodaConfig:
         with pytest.raises(ValueError, match="non-ASCII"):
             CodaConfig(token="tok\ufffd").validate()
 
+    def test_non_ascii_message_does_not_blame_a_specific_env_var(self) -> None:
+        """The token may have come from CODA_TOKEN or CODA_PAT \u2014 naming one misleads."""
+        with pytest.raises(ValueError) as excinfo:
+            CodaConfig(token="tok\ufffd").validate()
+        assert "CODA_API_TOKEN" not in str(excinfo.value)
+
     def test_validate_ascii_token_ok(self) -> None:
         CodaConfig(token="abc-123-def").validate()  # should not raise

@@ -240,7 +240,7 @@ Webhooks, buttons, rate limits, payload design, idempotency.
 Rate limits, pagination, async mutations, error handling, retry.
 
 - Rate limits: 100 reads/6s, 10 writes/6s per token. 429 returns Retry-After header.
-- Pagination: default 25 items, max 500 (rows) / 200 (docs, pages, tables). Use pageToken.
+- Pagination: default 50 items (`coda_list_docs` 25, `coda_list_columns` 100), max 500 (rows) / 200 (docs, pages, tables). Use pageToken.
 - Write operations return requestId. Poll mutationStatus for completion. Status: queued, processing, completed, failed.
 - Error codes: 400 (bad request), 401 (invalid token), 403 (insufficient perms), 404 (not found), 429 (rate limited), 5xx (retry with backoff).
 - IDs are stable (survive renames/moves). Names are unstable -- always store by ID.

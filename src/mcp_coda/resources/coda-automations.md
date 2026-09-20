@@ -6,7 +6,7 @@ Rules for building automations, webhooks, and triggered actions in Coda.
 
 | Type | Trigger | API Tool |
 |------|---------|----------|
-| Webhook | External HTTP POST to a Coda webhook URL | `coda_trigger_webhook` |
+| Webhook | External HTTP POST to a Coda webhook URL | `coda_trigger_automation` |
 | Button | User clicks a button column or page button | `coda_push_button` |
 | Time-based | Scheduled (hourly, daily, etc.) | Configured in Coda UI only |
 | Row change | A row value changes | Configured in Coda UI only |

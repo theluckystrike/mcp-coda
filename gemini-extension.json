@@ -13,7 +13,7 @@
   "settings": [
     {
       "name": "CODA_API_TOKEN",
-      "description": "Coda API token",
+      "description": "Coda API token (also accepts CODA_TOKEN or CODA_PAT)",
       "required": true,
       "sensitive": true
     }

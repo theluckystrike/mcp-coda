@@ -6,14 +6,14 @@ How to insert, update, upsert, and delete rows in Coda tables.
 
 | Operation | Tool | Behavior |
 |-----------|------|----------|
-| Insert | `coda_upsert_rows` (no key columns) | Always creates new rows |
-| Upsert | `coda_upsert_rows` (with key columns) | Updates if key matches, inserts if not |
+| Insert | `coda_insert_rows` (no key columns) | Always creates new rows |
+| Upsert | `coda_insert_rows` (with key columns) | Updates if key matches, inserts if not |
 | Update | `coda_update_row` | Updates a single row by row ID |
 | Delete | `coda_delete_row` / `coda_delete_rows` | Removes rows by ID |
 
 ## Bulk Operations
 
-- `coda_upsert_rows` accepts up to **500 rows** per request.
+- `coda_insert_rows` accepts up to **500 rows** per request.
 - For larger datasets, batch into 500-row chunks and wait for each mutation to complete before sending the next.
 - Each upsert returns a `requestId` — poll `coda_get_mutation_status` before proceeding.
 
@@ -66,7 +66,7 @@ How to insert, update, upsert, and delete rows in Coda tables.
 
 ## Anti-Patterns
 
-- Inserting rows one at a time in a loop — batch with `coda_upsert_rows`
+- Inserting rows one at a time in a loop — batch with `coda_insert_rows`
 - Using display-column values as upsert keys when they are not unique
 - Not waiting for mutation completion before dependent writes
 - Attempting to write to calculated/lookup columns — check `calculated` flag first

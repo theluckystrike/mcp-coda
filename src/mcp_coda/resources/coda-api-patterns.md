@@ -27,7 +27,7 @@ All list endpoints return paginated responses:
 }
 ```
 
-- Default page size: 25 items. Max: 500 (rows), 200 (docs, pages, tables).
+- Default page size: 50 items (`coda_list_docs` 25, `coda_list_columns` 100). Max: 500 (rows), 200 (docs, pages, tables).
 - Use `limit` parameter to control page size.
 - Use `pageToken` from the response to fetch the next page.
 - When `nextPageToken` is absent, you have reached the last page.
@@ -74,14 +74,14 @@ Write operations that modify data return a `requestId`:
 
 - IDs are stable — they survive renames, moves, and doc copies.
 - Names are unstable — always store and reference by ID.
-- Use `coda_resolve_link` to convert browser URLs to API IDs.
+- Use `coda_resolve_browser_link` to convert browser URLs to API IDs.
 
 ## Request Best Practices
 
 - Include `User-Agent` header identifying your integration.
 - Use `valueFormat=simpleWithArrays` for row values — it returns clean scalars instead of rich objects.
 - Specify only the columns you need via `useColumnNames=true` to reduce response size.
-- For bulk row operations, prefer `coda_upsert_rows` over individual `coda_update_row` calls.
+- For bulk row operations, prefer `coda_insert_rows` over individual `coda_update_row` calls.
 - Max 500 rows per upsert request.
 
 ## Retry Strategy

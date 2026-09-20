@@ -46,7 +46,7 @@ class CodaConfig:
             self.token.encode("ascii")
         except UnicodeEncodeError:
             msg = (
-                "CODA_API_TOKEN contains non-ASCII characters. "
+                "The Coda token contains non-ASCII characters. "
                 "The token may have been incorrectly decoded (e.g. base64). "
                 "Coda API tokens are plain ASCII strings."
             )

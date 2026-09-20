@@ -15,7 +15,8 @@ Built on FastMCP. Published to PyPI as `mcp-coda`; normal install is `uvx mcp-co
 - `src/mcp_coda/client.py` — async httpx client wrapping every Coda API call
 - `src/mcp_coda/config.py` — `CodaConfig` dataclass built from env vars
 - `src/mcp_coda/exceptions.py` — `CodaApiError`, `CodaNotFoundError`, `CodaRateLimitError`, …
-- `tests/unit/` — ~355 tool- and unit-level tests; `tests/conftest.py` holds shared fixtures
+- `tests/unit/` — ~307 tool- and unit-level tests; `tests/conftest.py` holds shared fixtures
+- `tests/test_doc_parity.py` — re-derives tool/resource/prompt counts, tool names and version strings from the source and asserts the docs match; `tests/test_links.py` checks external URLs
 - `evaluations/eval.xml` — question / expected-answer / expected-tool pairs used to sanity-check tool selection
 
 ## Key patterns
@@ -23,7 +24,7 @@ Built on FastMCP. Published to PyPI as `mcp-coda`; normal install is `uvx mcp-co
 - Tools never raise — every tool wraps its body in try/except and returns `_err(e)`
 - Every tool returns `str` (JSON via `_ok`/`_err`, markdown via `_ok_markdown`)
 - Write tools call `_check_write(ctx)` before any mutation
-- List responses include `{items, has_more, next_cursor, total_count}`; paginated endpoints default to 25 per page
+- List responses include `{items, has_more, next_cursor, total_count}`; most paginated endpoints default to `limit=50` (`coda_list_docs` 25, `coda_list_columns` 100)
 - Rate-limit errors carry `retry_after` seconds; the server does **not** retry 429s itself
 - Row writes are async server-side: they return a `requestId`, poll it with `coda_get_mutation_status`
 
@@ -171,11 +172,11 @@ Any changeset that adds, removes, or modifies tools, resources, or prompts MUST 
 - `llms.txt` — tool count in tagline and documentation link
 - `llms-full.txt` — tool count in tagline, documentation link, full tool reference section
 - `AGENTS.md` — tool count in intro, tool inventory table
-- `GEMINI.md` — tool count in intro, tool categories, common workflows
 - `server.json` — `description` field (≤100 chars)
 - `gemini-extension.json` — `description` field
+- `src/mcp_coda/resources/**.md` — the rules/guides shipped to clients; they must only name tools that exist
 
-Check: tool count matches the registered tools (`grep -c '^async def coda_' src/mcp_coda/servers/*.py`), category list is complete, and new tools appear in the right sections with parameters and annotations.
+Check: `uv run pytest tests/test_doc_parity.py` re-derives every count, tool name and version string from the source and fails on drift. To eyeball the total: `grep -c '^async def coda_' src/mcp_coda/servers/*.py`. Also confirm the category list is complete and new tools appear in the right sections with parameters and annotations.
 
 ## Known limitations
 

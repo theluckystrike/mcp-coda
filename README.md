@@ -314,7 +314,7 @@ The server provides [MCP prompts](https://modelcontextprotocol.io/docs/concepts/
 
 ```
 "Share a doc with a teammate"
-→ coda_add_permission(doc_id="d1", access="write", principal={"type": "email", "email": "alice@example.com"})
+→ coda_add_permission(doc_id="d1", access="write", principal_email="alice@example.com")
 
 "List who has access to a doc"
 → coda_list_permissions(doc_id="d1")
@@ -332,7 +332,7 @@ The server provides [MCP prompts](https://modelcontextprotocol.io/docs/concepts/
 
 ### Rate Limits
 
-Coda enforces per-token rate limits (varies by plan). When rate-limited, tools return a 429 error with `retry_after` seconds. Use `coda_rate_limit_budget` to check remaining budget before batch operations. Paginated endpoints default to 25 results per page; use `limit` to adjust.
+Coda enforces per-token rate limits (varies by plan). When rate-limited, tools return a 429 error with `retry_after` seconds. Use `coda_rate_limit_budget` to check remaining budget before batch operations. Most paginated endpoints default to 50 results per page (`coda_list_docs` 25, `coda_list_columns` 100); use `limit` to adjust.
 
 ### Async Mutations
 

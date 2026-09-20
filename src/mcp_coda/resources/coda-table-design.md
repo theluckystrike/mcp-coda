@@ -45,7 +45,7 @@ Pattern:
 ## Calculated Columns
 
 - Any column can have a formula. Calculated columns (`column.calculated == true`) are read-only.
-- Do not attempt to write values to calculated columns via `coda_upsert_rows` — the API will reject it.
+- Do not attempt to write values to calculated columns via `coda_insert_rows` — the API will reject it.
 - Use `coda_list_columns` to check `calculated` flag before building write payloads.
 
 ## Row Limits and Performance
