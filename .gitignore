@@ -20,3 +20,6 @@ CLAUDE.md
 .claude/
 .cursor/
 .cursorrules
+
+# 1Password shell-plugin config: local tool state, not project config.
+.op/
